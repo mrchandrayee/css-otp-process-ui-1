@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d19">
+  <title>CSS OTP Process UI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <section class="auth-card" aria-live="polite">
+      <!-- Phone number screen -->
+      <section class="screen active" id="phoneScreen">
+        <div class="icon-orb lock-orb" aria-hidden="true">🔐</div>
+        <h1>Secure Login</h1>
+        <p class="subtitle">Enter your mobile number to receive a one-time verification code.</p>
+
+        <form id="phoneForm" novalidate>
+          <label for="phone">Mobile Number</label>
+          <div class="phone-input">
+            <select class="country" id="country" aria-label="Country code">
+              <option value="+91">+91</option>
+              <option value="+1">+1</option>
+              <option value="+44">+44</option>
+              <option value="+61">+61</option>
+              <option value="+971">+971</option>
+            </select>
+            <input id="phone" type="tel" inputmode="numeric" autocomplete="tel-national"
+                   placeholder="Enter mobile number" maxlength="10" required>
+          </div>
+          <p class="field-error" id="phoneError" role="alert"></p>
+          <button class="primary-btn" type="submit">Send OTP <span>→</span></button>
+        </form>
+
+        <div class="progress-track"><span class="progress-fill first"></span></div>
+      </section>
+
+      <!-- OTP verification screen -->
+      <section class="screen" id="otpScreen">
+        <div class="icon-orb mail-orb" aria-hidden="true">✉</div>
+        <h1>Verify OTP</h1>
+        <p class="subtitle">We've sent a 6-digit verification code to<br><strong id="phonePreview">+91 0000000000</strong></p>
+
+        <form id="otpForm" novalidate>
+          <div class="otp-inputs" id="otpInputs" aria-label="Six digit verification code">
+            <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" autocomplete="one-time-code" aria-label="Digit 1">
+            <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 2">
+            <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 3">
+            <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 4">
+            <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 5">
+            <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 6">
+          </div>
+
+          <p class="timer">Code expires in <strong id="countdown">01:00</strong></p>
+          <p class="field-error otp-error" id="otpError" role="alert"></p>
+          <button class="primary-btn" type="submit">Verify OTP <span>✓</span></button>
+        </form>
+
+        <p class="resend-line">Didn't receive the code? <button id="resendBtn" type="button" disabled>Resend OTP</button></p>
+        <button class="text-btn change-number" id="changeNumber" type="button">← Change mobile number</button>
+        <div class="progress-track"><span class="progress-fill second"></span></div>
+      </section>
+
+      <!-- Success screen -->
+      <section class="screen success-screen" id="successScreen">
+        <div class="success-orb" aria-hidden="true">✓</div>
+        <h1>Verified!</h1>
+        <p class="subtitle">Your mobile number has been successfully verified.</p>
+        <button class="primary-btn" id="continueBtn" type="button">Continue <span>→</span></button>
+      </section>
+    </section>
+
+    <p class="demo-note">DEMO MODE · OTP: <strong id="demoCode">435345</strong></p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
